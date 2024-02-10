@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is fardifferent from the Command Pattern used in object-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Command Pattern">
+<meta property="og:url" content="https://mhshahzad.tech/2024/02/09/Command-Pattern/index.html">
+<meta property="og:site_name" content="Muhammad H. Shahzad">
+<meta property="og:description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is fardifferent from the Command Pattern used in object-">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-09T13:21:02.000Z">
+<meta property="article:modified_time" content="2024-02-10T07:25:50.889Z">
+<meta property="article:author" content="Muhammad H. Shahzad">
+<meta property="article:tag" content="Design Patterns">
+<meta property="article:tag" content="Behavioral Patterns">
+<meta property="article:tag" content="Software Engineering">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Microservice">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Command Pattern</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/mhshahzad">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/02/05/Hello-World-0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mhshahzad.tech/2024/02/09/Command-Pattern/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&text=Command Pattern"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&is_video=false&description=Command Pattern"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Command Pattern&body=Check out this article: https://mhshahzad.tech/2024/02/09/Command-Pattern/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&name=Command Pattern&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mhshahzad.tech/2024/02/09/Command-Pattern/&t=Command Pattern"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Command Pattern
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Muhammad H. Shahzad</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-02-09T13:21:02.000Z" class="dt-published" itemprop="datePublished">2024-02-09</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Architecture/" rel="tag">Architecture</a>, <a class="p-category" href="/tags/Behavioral-Patterns/" rel="tag">Behavioral Patterns</a>, <a class="p-category" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="p-category" href="/tags/Microservice/" rel="tag">Microservice</a>, <a class="p-category" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>In this post, I will be discussing the Command Pattern in the context of Microservice Architecture. </p>
+<blockquote>
+<p>Should not be taken as <a target="_blank" rel="noopener" href="https://www.google.com/search?q=cqrs">CQRS</a> which is far<br>different from the <a target="_blank" rel="noopener" href="https://www.google.com/search?q=command+pattern">Command Pattern</a> used in object-oriented programming.</p>
+</blockquote>
+<p>This post will be helpful to those who are interested in learning about design patterns,<br>software engineering and particularly microservice architecture.</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>We have a lot of departments which make a lot of services. In one flow, we add and remove from sales orders and<br>generate a lot of versions for consumption. The sales order services are tightly coupled with other departments making<br>it hard to extend and manage… The command pattern to rescue. </p>
+<h3 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3><p>The invoker and receiver do not need to know about each other as well as other receivers can be added easily to reach an<br>expected state. All services talking to command manager would have a clear flow.<br>They only would send the command to <code>ADD</code> or <code>REMOVE</code>,<br>flight or hotel and&#x2F;or ancillaries, and.. would not want to know what are the underlying schemas or whatever to communicate with each other ?<br>I am feeling the advantages already… </p>
+<h3 id="Problem-in-hand"><a href="#Problem-in-hand" class="headerlink" title="Problem in hand"></a>Problem in hand</h3><p>Services tightly coupled in a service oriented architecture (microservice) while using the event driven sourcing.</p>
+<ul>
+<li>Extra consumption of resources</li>
+<li>Extension to other services (conform to other schemas)</li>
+<li>Domains getting polluted with each other’s jargons</li>
+<li>They will be added to each other’s bounded context </li>
+<li>Now this is getting to my guess would be, a big ball of mud ? back to monoliths. <ul>
+<li>Leave your comments, I would be happy to know.</li>
+</ul>
+</li>
+</ul>
+<h3 id="After-the-switch"><a href="#After-the-switch" class="headerlink" title="After the switch"></a>After the switch</h3><p>The command pattern by default exclusively gives a roll-back functionality, diagnosis phases, and what not ?</p>
+<p>Suppose, a customer wants to have his or her flight changed to a specific date, the invoker would send a command saying a remove<br>to a flight then if they have accommodation that would need to be moved as well, so some combination of commands would be sent<br>to understand if they all go together or not because.. Think of it this way, a hotel might not be available on those dates<br>where the flight needs to be moved to or. That would be a diagnosis phase and customer would be informed accordingly.<br>There are endless possibilities. </p>
+<p>So, no more extensive use of events driving to each way. Clear sight of what is needed and how it can be achieved.<br>Give a command to invoker, invoker makes sure that is achievable by calling each department (issues a matching sequence of commands) and if<br>the desired state is possible, announce it to the stakeholder. An extra and neat line of encapsulation.</p>
+<p>Let me know if you liked this post and would like to know anything else about this topic. </p>
+<p>Thanks for visiting!</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/mhshahzad">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mhshahzad.tech/2024/02/09/Command-Pattern/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&text=Command Pattern"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&is_video=false&description=Command Pattern"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Command Pattern&body=Check out this article: https://mhshahzad.tech/2024/02/09/Command-Pattern/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&title=Command Pattern"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mhshahzad.tech/2024/02/09/Command-Pattern/&name=Command Pattern&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mhshahzad.tech/2024/02/09/Command-Pattern/&t=Command Pattern"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Muhammad H. Shahzad
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/mhshahzad">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

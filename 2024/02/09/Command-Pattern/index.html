@@ -14,7 +14,7 @@
 <meta property="og:description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is far different from the Command Pattern used in object">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-09T13:21:02.000Z">
-<meta property="article:modified_time" content="2024-02-10T07:41:59.811Z">
+<meta property="article:modified_time" content="2024-02-10T07:52:02.101Z">
 <meta property="article:author" content="Muhammad H. Shahzad">
 <meta property="article:tag" content="Design Patterns">
 <meta property="article:tag" content="Behavioral Patterns">
@@ -181,7 +181,7 @@
 <h2 id="After-the-switch"><a href="#After-the-switch" class="headerlink" title="After the switch"></a>After the switch</h2><p>The command pattern by default exclusively gives a roll-back functionality, diagnosis phases, and what not ?</p>
 <p>Suppose, a customer wants to have his or her flight changed to a specific date, the invoker would send a command saying a remove to a flight then if they have accommodation that would need to be moved as well, so some combination of commands would be sent to understand if they all go together or not because.. Think of it this way, a hotel might not be available on those dates where the flight needs to be moved to or. That would be a diagnosis phase and customer would be informed accordingly.<br>There are endless possibilities. </p>
 <p>So, no more extensive use of events driving to each way. Clear sight of what is needed and how it can be achieved.<br>Give a command to invoker, invoker makes sure that is achievable by calling each department (issues a matching sequence of commands) and if the desired state is possible, announce it to the stakeholder. An extra and neat line of encapsulation.</p>
-<p>Let me know if you liked this post and would like to know anything else about this topic. </p>
+<p>Let me know if you have liked this post and would like to know anything else about this topic. </p>
 <p>Thanks for visiting!</p>
 
   </div>

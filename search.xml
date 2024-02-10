@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Command Pattern</title>
+      <link href="/2024/02/09/Command-Pattern/"/>
+      <url>/2024/02/09/Command-Pattern/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>In this post, I will be discussing the Command Pattern in the context of Microservice Architecture. </p><blockquote><p>Should not be taken as <a href="https://www.google.com/search?q=cqrs">CQRS</a> which is far different from the <a href="https://www.google.com/search?q=command+pattern">Command Pattern</a> used in object-oriented programming.</p></blockquote><p>This post will be helpful to those who are interested in learning about design patterns, software engineering and particularly microservice architecture.</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>We have a lot of departments which make a lot of services. In one flow, we add and remove from sales orders and generate a lot of versions for consumption. The sales order services are tightly coupled with other departments making it hard to extend and manage… The command pattern to rescue. </p><h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><p>The invoker and receiver do not need to know about each other as well as other receivers can be added easily to reach an expected state. All services talking to command manager would have a clear flow.<br>They only would send the command to <code>ADD</code> or <code>REMOVE</code>, flight or hotel and&#x2F;or ancillaries, and.. would not want to know what are the underlying schemas or whatever to communicate with each other ?<br>I am feeling the advantages already… </p><h2 id="Problem-in-hand"><a href="#Problem-in-hand" class="headerlink" title="Problem in hand"></a>Problem in hand</h2><p>Services tightly coupled in a service oriented architecture (microservice) while using the event driven sourcing.</p><ul><li>Extra consumption of resources</li><li>Extension to other services (conform to other schemas)</li><li>Domains getting polluted with each other’s jargons</li><li>They will be added to each other’s bounded context </li><li>Now this is getting to my guess would be, a big ball of mud ? back to monoliths. <ul><li>Leave your comments, I would be happy to know.</li></ul></li></ul><h2 id="After-the-switch"><a href="#After-the-switch" class="headerlink" title="After the switch"></a>After the switch</h2><p>The command pattern by default exclusively gives a roll-back functionality, diagnosis phases, and what not ?</p><p>Suppose, a customer wants to have his or her flight changed to a specific date, the invoker would send a command saying a remove to a flight then if they have accommodation that would need to be moved as well, so some combination of commands would be sent to understand if they all go together or not because.. Think of it this way, a hotel might not be available on those dates where the flight needs to be moved to or. That would be a diagnosis phase and customer would be informed accordingly.<br>There are endless possibilities. </p><p>So, no more extensive use of events driving to each way. Clear sight of what is needed and how it can be achieved.<br>Give a command to invoker, invoker makes sure that is achievable by calling each department (issues a matching sequence of commands) and if the desired state is possible, announce it to the stakeholder. An extra and neat line of encapsulation.</p><p>Let me know if you have liked this post and would like to know anything else about this topic. </p><p>Thanks for visiting!</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Design Patterns </tag>
+            
+            <tag> Behavioral Patterns </tag>
+            
+            <tag> Software Engineering </tag>
+            
+            <tag> Architecture </tag>
+            
+            <tag> Microservice </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2024/02/05/Hello-World-0/"/>
+      <url>/2024/02/05/Hello-World-0/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to my blog. This post is just a test. Marking the beginning of my journey into the world of blogging.</p><p>Thanks for visiting this post.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>

@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is fardifferent from the Command Pattern used in object-">
+    <meta name="description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is far different from the Command Pattern used in object">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Command Pattern">
 <meta property="og:url" content="https://mhshahzad.tech/2024/02/09/Command-Pattern/index.html">
 <meta property="og:site_name" content="Muhammad H. Shahzad">
-<meta property="og:description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is fardifferent from the Command Pattern used in object-">
+<meta property="og:description" content="AbstractIn this post, I will be discussing the Command Pattern in the context of Microservice Architecture.   Should not be taken as CQRS which is far different from the Command Pattern used in object">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-09T13:21:02.000Z">
-<meta property="article:modified_time" content="2024-02-10T07:25:50.889Z">
+<meta property="article:modified_time" content="2024-02-10T07:41:59.811Z">
 <meta property="article:author" content="Muhammad H. Shahzad">
 <meta property="article:tag" content="Design Patterns">
 <meta property="article:tag" content="Behavioral Patterns">
@@ -115,7 +115,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
       </div>
     
   </span>
@@ -160,14 +160,14 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>In this post, I will be discussing the Command Pattern in the context of Microservice Architecture. </p>
+    <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>In this post, I will be discussing the Command Pattern in the context of Microservice Architecture. </p>
 <blockquote>
-<p>Should not be taken as <a target="_blank" rel="noopener" href="https://www.google.com/search?q=cqrs">CQRS</a> which is far<br>different from the <a target="_blank" rel="noopener" href="https://www.google.com/search?q=command+pattern">Command Pattern</a> used in object-oriented programming.</p>
+<p>Should not be taken as <a target="_blank" rel="noopener" href="https://www.google.com/search?q=cqrs">CQRS</a> which is far different from the <a target="_blank" rel="noopener" href="https://www.google.com/search?q=command+pattern">Command Pattern</a> used in object-oriented programming.</p>
 </blockquote>
-<p>This post will be helpful to those who are interested in learning about design patterns,<br>software engineering and particularly microservice architecture.</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>We have a lot of departments which make a lot of services. In one flow, we add and remove from sales orders and<br>generate a lot of versions for consumption. The sales order services are tightly coupled with other departments making<br>it hard to extend and manage… The command pattern to rescue. </p>
-<h3 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3><p>The invoker and receiver do not need to know about each other as well as other receivers can be added easily to reach an<br>expected state. All services talking to command manager would have a clear flow.<br>They only would send the command to <code>ADD</code> or <code>REMOVE</code>,<br>flight or hotel and&#x2F;or ancillaries, and.. would not want to know what are the underlying schemas or whatever to communicate with each other ?<br>I am feeling the advantages already… </p>
-<h3 id="Problem-in-hand"><a href="#Problem-in-hand" class="headerlink" title="Problem in hand"></a>Problem in hand</h3><p>Services tightly coupled in a service oriented architecture (microservice) while using the event driven sourcing.</p>
+<p>This post will be helpful to those who are interested in learning about design patterns, software engineering and particularly microservice architecture.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>We have a lot of departments which make a lot of services. In one flow, we add and remove from sales orders and generate a lot of versions for consumption. The sales order services are tightly coupled with other departments making it hard to extend and manage… The command pattern to rescue. </p>
+<h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><p>The invoker and receiver do not need to know about each other as well as other receivers can be added easily to reach an expected state. All services talking to command manager would have a clear flow.<br>They only would send the command to <code>ADD</code> or <code>REMOVE</code>, flight or hotel and&#x2F;or ancillaries, and.. would not want to know what are the underlying schemas or whatever to communicate with each other ?<br>I am feeling the advantages already… </p>
+<h2 id="Problem-in-hand"><a href="#Problem-in-hand" class="headerlink" title="Problem in hand"></a>Problem in hand</h2><p>Services tightly coupled in a service oriented architecture (microservice) while using the event driven sourcing.</p>
 <ul>
 <li>Extra consumption of resources</li>
 <li>Extension to other services (conform to other schemas)</li>
@@ -178,9 +178,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="After-the-switch"><a href="#After-the-switch" class="headerlink" title="After the switch"></a>After the switch</h3><p>The command pattern by default exclusively gives a roll-back functionality, diagnosis phases, and what not ?</p>
-<p>Suppose, a customer wants to have his or her flight changed to a specific date, the invoker would send a command saying a remove<br>to a flight then if they have accommodation that would need to be moved as well, so some combination of commands would be sent<br>to understand if they all go together or not because.. Think of it this way, a hotel might not be available on those dates<br>where the flight needs to be moved to or. That would be a diagnosis phase and customer would be informed accordingly.<br>There are endless possibilities. </p>
-<p>So, no more extensive use of events driving to each way. Clear sight of what is needed and how it can be achieved.<br>Give a command to invoker, invoker makes sure that is achievable by calling each department (issues a matching sequence of commands) and if<br>the desired state is possible, announce it to the stakeholder. An extra and neat line of encapsulation.</p>
+<h2 id="After-the-switch"><a href="#After-the-switch" class="headerlink" title="After the switch"></a>After the switch</h2><p>The command pattern by default exclusively gives a roll-back functionality, diagnosis phases, and what not ?</p>
+<p>Suppose, a customer wants to have his or her flight changed to a specific date, the invoker would send a command saying a remove to a flight then if they have accommodation that would need to be moved as well, so some combination of commands would be sent to understand if they all go together or not because.. Think of it this way, a hotel might not be available on those dates where the flight needs to be moved to or. That would be a diagnosis phase and customer would be informed accordingly.<br>There are endless possibilities. </p>
+<p>So, no more extensive use of events driving to each way. Clear sight of what is needed and how it can be achieved.<br>Give a command to invoker, invoker makes sure that is achievable by calling each department (issues a matching sequence of commands) and if the desired state is possible, announce it to the stakeholder. An extra and neat line of encapsulation.</p>
 <p>Let me know if you liked this post and would like to know anything else about this topic. </p>
 <p>Thanks for visiting!</p>
 
@@ -208,7 +208,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advantages"><span class="toc-number">3.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-in-hand"><span class="toc-number">4.</span> <span class="toc-text">Problem in hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#After-the-switch"><span class="toc-number">5.</span> <span class="toc-text">After the switch</span></a></li></ol>
       </div>
     
 
